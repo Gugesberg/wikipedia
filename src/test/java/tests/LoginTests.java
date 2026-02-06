@@ -1,10 +1,11 @@
+package tests;
+
 import com.github.javafaker.Faker;
 import io.qameta.allure.Owner;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import pages.HeadPage;
+import pages.MainPage;
 import pages.LoginPage;
 
 import static com.codeborne.selenide.Condition.text;
@@ -15,7 +16,7 @@ import static pages.LoginPage.validUserName;
 
 public class LoginTests extends BaseTest
 {
-    HeadPage headPage = new HeadPage();
+    MainPage mainPage = new MainPage();
     LoginPage loginPage = new LoginPage();
     Faker faker = new Faker();
     String fakeLogin = faker.name().username();
@@ -28,7 +29,7 @@ public class LoginTests extends BaseTest
     @DisplayName("Успешная авторизация")
     void succsessAuthorization() {
         step("Нажимаем на кнопку 'Войти'" , () -> {
-            headPage.pushLoginLink();
+            mainPage.pushLoginLink();
                 });
         step("Вводим существующее имя пользователя" , () -> {
             loginPage.setUserName(validUserName);
@@ -54,7 +55,7 @@ public class LoginTests extends BaseTest
     @DisplayName("Попытка авторизации с неверным паролем")
     void authorizationWithIncorrectPassword() {
         step("Нажимаем на кнопку 'Войти'" , () -> {
-            headPage.pushLoginLink();
+            mainPage.pushLoginLink();
         });
         step("Вводим существующее имя пользователя" , () -> {
             loginPage.setUserName(validUserName);
@@ -78,7 +79,7 @@ public class LoginTests extends BaseTest
     @DisplayName("Попытка авторизации с неверным логином")
     void authorizationauthorizationWithIncorrectUserName() {
         step("Нажимаем на кнопку 'Войти'" , () -> {
-            headPage.pushLoginLink();
+            mainPage.pushLoginLink();
         });
         step("Вводим сгенерированное имя пользователя" , () -> {
             loginPage.setUserName(fakeLogin);
