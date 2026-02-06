@@ -6,7 +6,7 @@ import static com.codeborne.selenide.Selenide.$;
 
 public class HeadPage {
     private SelenideElement loginLinkLocator = $("#pt-login"),
-            depositeLinkLocator = loginLinkLocator = $("#pt-anoncontribs"),
+            depositeLinkLocator  = $("#pt-anoncontribs"),
             savePageAsPDFLinkLocator = $("#coll-download-as-rl");
 
     public HeadPage pushLoginLink(){
