@@ -35,6 +35,9 @@ dependencies {
     testImplementation("com.codeborne:selenide:7.14.0")
     testImplementation("com.github.javafaker:javafaker:1.0.2")
     testImplementation("io.qameta.allure:allure-selenide:2.17.3")
+    testImplementation("io.github.bonigarcia:webdrivermanager:5.9.2")
+    testImplementation("ch.qos.logback:logback-classic:1.5.18")
+    testImplementation("org.slf4j:jul-to-slf4j:2.0.16")
 
 
 
@@ -43,6 +46,11 @@ dependencies {
 
 tasks.test {
     useJUnitPlatform()
+    systemProperty("selenide.headless", "true")
+    systemProperty("selenide.browser", "chrome")
+    systemProperty("selenide.timeout", "15000")
+    systemProperty("webdriver.chrome.driver", "/usr/bin/chromedriver")
+    systemProperty("selenide.reportsFolder", "build/reports/selenide")
     testLogging {
         lifecycle {
             events ("started", "skipped","failed","standard_error","standard_out")
