@@ -1,12 +1,9 @@
-package tests;
-
 import com.github.javafaker.Faker;
 import io.qameta.allure.Owner;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import pages.MainPage;
 import pages.LoginPage;
+import pages.MainPage;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
@@ -24,7 +21,7 @@ public class LoginTests extends BaseTest
 
 
     @Test
-    @Disabled("проблемы с прохождением капчи")
+    //@Disabled("проблемы с прохождением капчи")
     @Owner("AlexIvanov")
     @DisplayName("Успешная авторизация")
     void succsessAuthorization() {
