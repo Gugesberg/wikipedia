@@ -38,6 +38,7 @@ dependencies {
     testImplementation("io.github.bonigarcia:webdrivermanager:5.9.2")
     testImplementation("ch.qos.logback:logback-classic:1.5.18")
     testImplementation("org.slf4j:jul-to-slf4j:2.0.16")
+    testImplementation("io.github.bonigarcia:webdrivermanager:5.9.2")
 
 
 
@@ -46,17 +47,25 @@ dependencies {
 
 tasks.test {
     useJUnitPlatform()
+
+    //  WebDriverManager — АВТОМАТИЧЕСКИ скачает ChromeDriver
+    systemProperty("webdriver.chrome.driver", "")
+    systemProperty("webdriver.manager.enabled", "true")
+
+    //  Headless Chrome для Jenkins
     systemProperty("selenide.headless", "true")
     systemProperty("selenide.browser", "chrome")
     systemProperty("selenide.timeout", "15000")
-    systemProperty("webdriver.chrome.driver", "/usr/bin/chromedriver")
-    systemProperty("selenide.reportsFolder", "build/reports/selenide")
+
+    //  Критические аргументы Linux CI
+    systemProperty("selenide.chromeOptionsArgs",
+        "--no-sandbox,--disable-dev-shm-usage,--disable-gpu,--disable-extensions,--window-size=1920,1080")
+
     testLogging {
-        lifecycle {
-            events ("started", "skipped","failed","standard_error","standard_out")
-        }
-
+        events(TestLogEvent.PASSED, TestLogEvent.SKIPPED, TestLogEvent.FAILED,
+            TestLogEvent.STANDARD_OUT, TestLogEvent.STANDARD_ERROR)
+        exceptionFormat = TestExceptionFormat.FULL
+        showStandardStreams = true
     }
-
 }
 
